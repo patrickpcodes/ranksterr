@@ -44,6 +44,8 @@ namespace Ranksterr.Mobile
         [JsonPropertyName("vote_count")]
         public int VoteCount { get; set; }
 
+        public string DisplayTitle => $"{Title} ({DateTime.Parse(ReleaseDate).Year})";
+
         // Points property with change notification
         [JsonPropertyName("points")]
         public int Points

@@ -13,6 +13,10 @@ namespace Ranksterr.Mobile
         public Movie LeftMovie2 { get; set; } // Second movie for comparison
 
         public ICommand MovieSelectedCommand { get; }
+        public ICommand Movie1ClickedCommand { get; }
+        public ICommand Movie2ClickedCommand { get; }
+
+        private Dictionary<string, string> imageCache = new Dictionary<string, string>();
 
         public MovieComparisonPage()
         {
@@ -22,6 +26,8 @@ namespace Ranksterr.Mobile
 
             // Initialize the command
             MovieSelectedCommand = new Command<Movie>(OnMovieSelected);
+            Movie1ClickedCommand = new Command(() => OnMovie1Clicked() );
+            Movie2ClickedCommand = new Command( () => OnMovie2Clicked() );
         }
 
         private async void LoadMovies()
@@ -34,7 +40,7 @@ namespace Ranksterr.Mobile
                 string json = await reader.ReadToEndAsync();
 
                 var movieData = JsonSerializer.Deserialize<MovieCollection>(json);
-                Movies = movieData?.Parts;
+                Movies = movieData?.Parts.OrderBy(c => c.ReleaseDate).ToList();
 
                 // Set the LeftMovies to the first two movies for display
                 if (Movies != null && Movies.Count > 1)
@@ -49,6 +55,26 @@ namespace Ranksterr.Mobile
             }
         }
 
+        private string GetCachedImage(string posterPath)
+        {
+            if (!imageCache.ContainsKey(posterPath))
+            {
+                var imageUrl = $"https://image.tmdb.org/t/p/original{posterPath}";
+                imageCache[posterPath] = imageUrl; // Cache the image URL
+            }
+            return imageCache[posterPath];
+        }
+
+        private void OnMovie1Clicked()
+        {
+            OnMovieSelected(LeftMovie1);
+        }
+
+        private void OnMovie2Clicked()
+        {
+            OnMovieSelected(LeftMovie2);
+        }
+
         private void OnMovieSelected(Movie selectedMovie)
         {
             // Update the points for the selected movie
@@ -57,6 +83,9 @@ namespace Ranksterr.Mobile
             {
                 movie.Points++;
             }
+
+            Movies = Movies.OrderByDescending(c => c.Points).ThenBy(d => d.ReleaseDate).ToList();
+            OnPropertyChanged(nameof(Movies));
 
             // Get a new random pair of movies for comparison
             GetRandomPair();

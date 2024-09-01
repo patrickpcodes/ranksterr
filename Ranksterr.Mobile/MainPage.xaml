@@ -35,6 +35,7 @@
             <Button
                 Text="Go to Movie Comparison"
                 Clicked="OnMovieComparisonClicked"
+                BackgroundColor="Black"
                 HorizontalOptions="Fill"/>
         </VerticalStackLayout>
     </ScrollView>
