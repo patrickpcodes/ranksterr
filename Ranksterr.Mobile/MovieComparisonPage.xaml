@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Ranksterr.Mobile.MovieComparisonPage">
+
+    <VerticalStackLayout Padding="30,0"
+                         Spacing="25">
+        <Label Text="Movie Comparison"
+               FontSize="32"
+               HorizontalOptions="Center"/>
+        <HorizontalStackLayout Spacing="30">
+            <StackLayout x:Name="LeftColumn"
+                         WidthRequest="400"
+                         HeightRequest="400">
+                <HorizontalStackLayout Spacing="50">
+                    <StackLayout WidthRequest="200"
+                                 HeightRequest="300">
+                        <Image Source="{Binding LeftMovie1.PosterPath, Converter={StaticResource ImagePathConverter}}"
+                               HeightRequest="200"
+                               Aspect="AspectFit">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference Name=MovieComparisonPage}, Path=MovieSelectedCommand}"
+                                                      CommandParameter="{Binding LeftMovie1}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Label Text="{Binding LeftMovie1.Title}"/>
+                    </StackLayout>
+                    <StackLayout WidthRequest="200">
+                        <Image Source="{Binding LeftMovie2.PosterPath, Converter={StaticResource ImagePathConverter}}"
+                               HeightRequest="200"
+                               Aspect="AspectFit">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference Name=MovieComparisonPage}, Path=MovieSelectedCommand}"
+                                                      CommandParameter="{Binding LeftMovie2}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Label Text="{Binding LeftMovie2.Title}"/>
+                    </StackLayout>
+                </HorizontalStackLayout>
+            </StackLayout>
+            <StackLayout x:Name="RightColumn"
+                         WidthRequest="300"
+                         HeightRequest="400"
+                         Margin="200,0">
+                <Label Text="Rankings"
+                       FontSize="24"
+                       HorizontalOptions="Center"/>
+                <ScrollView BackgroundColor="LightBlue"
+                            HeightRequest="300">
+                    <CollectionView ItemsSource="{Binding Movies}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Orientation="Horizontal"
+                                             Padding="5">
+                                    <Label Text="{Binding Title}"
+                                           VerticalOptions="Center"/>
+                                    <Label Text="{Binding Points}"
+                                           VerticalOptions="Center"
+                                           Margin="10,0,0,0"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
+            </StackLayout>
+        </HorizontalStackLayout>
+        <Label Text="Choose a winner by clicking on the movie image."
+               FontSize="16"
+               HorizontalOptions="Center"
+               Margin="0,20,0,20"/>
+    </VerticalStackLayout>
+</ContentPage>
