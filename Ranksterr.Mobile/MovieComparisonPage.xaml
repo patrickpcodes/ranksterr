@@ -9,33 +9,38 @@
         <Label Text="Movie Comparison"
                FontSize="32"
                HorizontalOptions="Center"/>
-        <HorizontalStackLayout Spacing="30">
-            <StackLayout x:Name="LeftColumn"
-                         WidthRequest="400"
-                         HeightRequest="400">
-                <HorizontalStackLayout Spacing="50">
-                    <StackLayout WidthRequest="200"
-                                 HeightRequest="300" BackgroundColor="Purple">
+        <Grid ColumnDefinitions="2*, 1*"
+                        Padding="30,0">
+            <StackLayout Grid.Column="0" x:Name="LeftColumn"
+                         WidthRequest="600"
+                         HeightRequest="500">
+                <Grid ColumnDefinitions="1*, 1*">
+                    <StackLayout Grid.Column="0" BackgroundColor="Purple">
                         <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding Movie1ClickedCommand}" />
+                            <TapGestureRecognizer Tapped="OnImage1Tapped" />
                         </StackLayout.GestureRecognizers>
-                        <ffimageloading:CachedImage Source="{Binding LeftMovie1.PosterPath, Converter={StaticResource ImagePathConverter}}"
+                        <ffimageloading:CachedImage Source="{Binding LeftMovie1.PosterPath, 
+                            Converter={StaticResource ImagePathConverter}}"
+                                                    HeightRequest="200"
+                                                    Aspect="AspectFit">
+                        </ffimageloading:CachedImage>
+                        <Label Text="{Binding LeftMovie1.DisplayTitle}" HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                    <StackLayout Grid.Column="1" BackgroundColor="Purple">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnImage2Tapped" />
+                        </StackLayout.GestureRecognizers>
+                        <ffimageloading:CachedImage Source="{Binding LeftMovie2.PosterPath, 
+                            Converter={StaticResource ImagePathConverter}}"
                                                     HeightRequest="200"
                                                     Aspect="AspectFit"/>
-                        <Label Text="{Binding LeftMovie1.DisplayTitle}"/>
+                        <Label Text="{Binding LeftMovie2.DisplayTitle}" HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand"/>
                     </StackLayout>
-                    <StackLayout WidthRequest="200" HeightRequest="300">
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding Movie2ClickedCommand}" />
-                        </StackLayout.GestureRecognizers>
-                        <ffimageloading:CachedImage Source="{Binding LeftMovie2.PosterPath, Converter={StaticResource ImagePathConverter}}"
-                                                    HeightRequest="200"
-                                                    Aspect="AspectFit"/>
-                        <Label Text="{Binding LeftMovie2.DisplayTitle}"/>
-                    </StackLayout>
-                </HorizontalStackLayout>
+                </Grid>
             </StackLayout>
-            <StackLayout x:Name="RightColumn"
+            <StackLayout Grid.Column="1" x:Name="RightColumn"
                          WidthRequest="300"
                          HeightRequest="400"
                          Margin="200,0">
@@ -60,7 +65,7 @@
                     </CollectionView>
                 </ScrollView>
             </StackLayout>
-        </HorizontalStackLayout>
+        </Grid>
         <Label Text="Choose a winner by clicking on the movie image."
                FontSize="16"
                HorizontalOptions="Center"

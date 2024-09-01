@@ -64,7 +64,18 @@ namespace Ranksterr.Mobile
             }
             return imageCache[posterPath];
         }
-
+        private void OnImage1Tapped( object sender, EventArgs e )
+        {
+            // Handle the tap
+            Console.WriteLine( "Image Tapped" );
+            OnMovie1Clicked();
+        }
+        private void OnImage2Tapped( object sender, EventArgs e )
+        {
+            // Handle the tap
+            Console.WriteLine( "Image Tapped" );
+            OnMovie2Clicked();
+        }
         private void OnMovie1Clicked()
         {
             OnMovieSelected(LeftMovie1);
