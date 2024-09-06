@@ -1,9 +1,17 @@
 import Link from "next/link";
 import React from "react";
 
-export default function Sidebar() {
+interface SidebarProps {
+  isOpen: boolean;
+}
+
+export default function Sidebar({ isOpen }: SidebarProps) {
   return (
-    <nav className="w-64 bg-gray-800 text-white h-screen p-4">
+    <nav
+      className={`fixed w-64 bg-gray-800 text-white h-screen p-4 transition-transform ${
+        isOpen ? "translate-x-0" : "-translate-x-full"
+      }`}
+    >
       <h2 className="text-lg font-bold">Navigation</h2>
       <ul>
         <li>

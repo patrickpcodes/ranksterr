@@ -17,3 +17,7 @@
         --radius: 0.5rem
     }
 }
+
+nav {
+    transition: transform 0.3s ease;
+}

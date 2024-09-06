@@ -1,7 +1,7 @@
 "use client"; // Ensure this component is client-side
 
 import React, { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button"; // Import Button from shadcn/ui
+import { Button } from "@/app/ui/button"; // Import Button from shadcn/ui
 
 export default function TopBar() {
   const [isDarkMode, setIsDarkMode] = useState(false);
