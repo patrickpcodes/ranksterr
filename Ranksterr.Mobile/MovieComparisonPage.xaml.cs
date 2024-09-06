@@ -1,8 +1,5 @@
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Windows.Input;
-using Microsoft.Maui.Controls;
 
 namespace Ranksterr.Mobile
 {
@@ -25,8 +22,8 @@ namespace Ranksterr.Mobile
             BindingContext = this; // Set the BindingContext
 
             // Initialize the command
-            MovieSelectedCommand = new Command<Movie>(OnMovieSelected);
-            Movie1ClickedCommand = new Command(() => OnMovie1Clicked() );
+            MovieSelectedCommand = new Command<Movie>( OnMovieSelected );
+            Movie1ClickedCommand = new Command( () => OnMovie1Clicked() );
             Movie2ClickedCommand = new Command( () => OnMovie2Clicked() );
         }
 
@@ -34,30 +31,30 @@ namespace Ranksterr.Mobile
         {
             try
             {
-                var assembly = typeof(MovieComparisonPage).Assembly;
-                using Stream stream = assembly.GetManifestResourceStream("Ranksterr.Mobile.Data.movies.json");
-                using StreamReader reader = new StreamReader(stream);
+                var assembly = typeof( MovieComparisonPage ).Assembly;
+                using Stream stream = assembly.GetManifestResourceStream( "Ranksterr.Mobile.Data.movies.json" );
+                using StreamReader reader = new StreamReader( stream );
                 string json = await reader.ReadToEndAsync();
 
-                var movieData = JsonSerializer.Deserialize<MovieCollection>(json);
-                Movies = movieData?.Parts.OrderBy(c => c.ReleaseDate).ToList();
+                var movieData = JsonSerializer.Deserialize<MovieCollection>( json );
+                Movies = movieData?.Parts.OrderBy( c => c.ReleaseDate ).ToList();
 
                 // Set the LeftMovies to the first two movies for display
-                if (Movies != null && Movies.Count > 1)
+                if( Movies != null && Movies.Count > 1 )
                 {
                     LeftMovie1 = Movies[0]; // First movie
                     LeftMovie2 = Movies[1]; // Second movie
                 }
             }
-            catch (Exception ex)
+            catch( Exception ex )
             {
-                Console.WriteLine($"Error loading movies: {ex.Message}");
+                Console.WriteLine( $"Error loading movies: {ex.Message}" );
             }
         }
 
-        private string GetCachedImage(string posterPath)
+        private string GetCachedImage( string posterPath )
         {
-            if (!imageCache.ContainsKey(posterPath))
+            if( !imageCache.ContainsKey( posterPath ) )
             {
                 var imageUrl = $"https://image.tmdb.org/t/p/original{posterPath}";
                 imageCache[posterPath] = imageUrl; // Cache the image URL
@@ -78,25 +75,25 @@ namespace Ranksterr.Mobile
         }
         private void OnMovie1Clicked()
         {
-            OnMovieSelected(LeftMovie1);
+            OnMovieSelected( LeftMovie1 );
         }
 
         private void OnMovie2Clicked()
         {
-            OnMovieSelected(LeftMovie2);
+            OnMovieSelected( LeftMovie2 );
         }
 
-        private void OnMovieSelected(Movie selectedMovie)
+        private void OnMovieSelected( Movie selectedMovie )
         {
             // Update the points for the selected movie
-            var movie = Movies.Find(m => m.Id == selectedMovie.Id);
-            if (movie != null)
+            var movie = Movies.Find( m => m.Id == selectedMovie.Id );
+            if( movie != null )
             {
                 movie.Points++;
             }
 
-            Movies = Movies.OrderByDescending(c => c.Points).ThenBy(d => d.ReleaseDate).ToList();
-            OnPropertyChanged(nameof(Movies));
+            Movies = Movies.OrderByDescending( c => c.Points ).ThenBy( d => d.ReleaseDate ).ToList();
+            OnPropertyChanged( nameof( Movies ) );
 
             // Get a new random pair of movies for comparison
             GetRandomPair();
@@ -104,15 +101,44 @@ namespace Ranksterr.Mobile
 
         private void GetRandomPair()
         {
-            if (Movies.Count < 2) return;
+            if( Movies.Count < 2 ) return;
 
-            var shuffled = Movies.OrderBy(m => Guid.NewGuid()).ToList();
+            var shuffled = Movies.OrderBy( m => Guid.NewGuid() ).ToList();
             LeftMovie1 = shuffled[0];
             LeftMovie2 = shuffled[1];
 
             // Refresh the UI
-            OnPropertyChanged(nameof(LeftMovie1));
-            OnPropertyChanged(nameof(LeftMovie2));
+            OnPropertyChanged( nameof( LeftMovie1 ) );
+            OnPropertyChanged( nameof( LeftMovie2 ) );
         }
+
+        private void OnMovieSelectionChanged( object sender, SelectionChangedEventArgs e )
+        {
+            var collectionView = (CollectionView)sender;
+            // Ensure the selected item is not null (when deselecting)
+            if( e.CurrentSelection != null && e.CurrentSelection.Count > 0 )
+            {
+                // Get the selected movie (you might need to cast it to your Movie class)
+                var selectedMovie = e.CurrentSelection.FirstOrDefault() as Movie;
+
+                if( selectedMovie != null )
+                {
+                    // Now you can access the MovieId
+                    var movieId = selectedMovie.Id;
+
+                    // Do something with the movieId, e.g., navigate to details page
+                    // or show a message.
+                    Console.WriteLine( $"Selected MovieId: {movieId}" );
+                }
+            }
+            collectionView.SelectedItem = null;
+
+            //// Temporarily disable selection mode to clear the selection visually
+            //collectionView.SelectionMode = SelectionMode.None;
+
+            //// Re-enable selection mode to allow further selections
+            //collectionView.SelectionMode = SelectionMode.Single;
+        }
+
     }
 }

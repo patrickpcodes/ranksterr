@@ -49,7 +49,9 @@
                        HorizontalOptions="Center"/>
                 <ScrollView BackgroundColor="LightBlue"
                             HeightRequest="300">
-                    <CollectionView ItemsSource="{Binding Movies}">
+                    <CollectionView ItemsSource="{Binding Movies}"   
+                                    SelectionMode="Single"
+                SelectionChanged="OnMovieSelectionChanged">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout Orientation="Horizontal"
