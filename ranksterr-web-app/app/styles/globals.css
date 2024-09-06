@@ -1,0 +1,19 @@
+/* globals.css */
+:root {
+    --background: #ffffff; /* Light mode background */
+    --foreground: #000000; /* Light mode text color */
+}
+
+.dark {
+    --background: #1a1a1a; /* Dark mode background */
+    --foreground: #f5f5f5; /* Dark mode text color */
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  :root {
+        --radius: 0.5rem
+    }
+}
