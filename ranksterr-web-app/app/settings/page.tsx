@@ -1,9 +1,14 @@
 import React from "react";
 
-export default function Settings() {
+const SettingsPage = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-background text-foreground">
-      <h1 className="text-4xl font-bold">Settings Page</h1>
+    <div className="p-4">
+      <h1 className="text-2xl font-bold mb-4">Settings</h1>
+      <p>
+        This is the settings page. You can add various settings options here.
+      </p>
     </div>
   );
-}
+};
+
+export default SettingsPage;

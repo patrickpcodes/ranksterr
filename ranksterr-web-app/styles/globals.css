@@ -1,23 +1,40 @@
-/* globals.css */
-:root {
-    --background: #ffffff; /* Light mode background */
-    --foreground: #000000; /* Light mode text color */
-}
-
-.dark {
-    --background: #1a1a1a; /* Dark mode background */
-    --foreground: #f5f5f5; /* Dark mode text color */
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer base {
   :root {
-        --radius: 0.5rem
-    }
-}
+    --background-light: #ffffff; /* White for light mode */
+    --background-dark: #000000; /* Black for dark mode */
+    --text-light: #ffffff; /* White text for dark mode */
+    --text-dark: #000000; /* Black text for light mode */
 
-nav {
-    transition: transform 0.3s ease;
+    --blue-light: #4f83cc; /* Light mode blue */
+    --blue-dark: #1e3a8a; /* Dark mode blue */
+  }
+
+  body {
+    background-color: var(--background-light);
+    color: var(--text-dark);
+  }
+
+  .dark body {
+    background-color: var(--background-dark);
+    color: var(--text-light);
+  }
+
+  .navbar {
+    background-color: var(--blue-light);
+  }
+
+  .dark .navbar {
+    background-color: var(--blue-dark);
+  }
+
+  .testbutton {
+    background-color: lightgreen;
+  }
+  .dark .testbutton {
+    background-color: darkgreen;
+  }
 }
