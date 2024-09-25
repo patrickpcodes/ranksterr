@@ -18,7 +18,7 @@ const RankingPage = () => {
         //const response = await fetch(`/data/${collectionId}.json`);
         const response = await fetch(`/data/james_bond.json`);
         const data = await response.json();
-        const initialMovies = data.parts.map((movie: any) => ({
+        const initialMovies = data.parts.map((movie: Movie) => ({
           id: movie.id,
           title: movie.title,
           poster_path: movie.poster_path,
