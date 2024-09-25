@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import RankingBattle from "@/components/RankingBattle";
 import CurrentRankings from "@/components/CurrentRankings";
@@ -75,4 +75,10 @@ const RankingPage = () => {
   );
 };
 
-export default RankingPage;
+const RankingPageWrapper = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <RankingPage />
+  </Suspense>
+);
+
+export default RankingPageWrapper;
