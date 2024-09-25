@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="3" failures="0" errors="0" time="6.337">
+  <testsuite name="Navbar" errors="0" failures="0" skipped="0" timestamp="2024-09-25T00:00:19" time="4.63" tests="3">
+    <testcase classname="Navbar displays the correct title based on the current path - Home" name="Navbar displays the correct title based on the current path - Home" time="0.064">
+    </testcase>
+    <testcase classname="Navbar displays the correct title based on the current path - Settings" name="Navbar displays the correct title based on the current path - Settings" time="0.017">
+    </testcase>
+    <testcase classname="Navbar toggles dark mode when the button is clicked" name="Navbar toggles dark mode when the button is clicked" time="0.121">
+    </testcase>
+  </testsuite>
+</testsuites>

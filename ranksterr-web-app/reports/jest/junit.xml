@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="1" failures="0" errors="0" time="5.27">
-  <testsuite name="Basic Jest Test" errors="0" failures="0" skipped="0" timestamp="2024-09-24T20:04:40" time="0.957" tests="1">
-    <testcase classname="Basic Jest Test should return true" name="Basic Jest Test should return true" time="0.011">
-    </testcase>
-  </testsuite>
-</testsuites>

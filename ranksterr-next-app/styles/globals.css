@@ -31,6 +31,16 @@
     background-color: var(--blue-dark);
   }
 
+  .ranking-card {
+    background-color: var(--blue-light);
+    color: var(--text-dark);
+  }
+
+  .dark .ranking-card {
+    background-color: var(--blue-dark);
+    color: var(--text-light);
+  }
+
   .testbutton {
     background-color: lightgreen;
   }
