@@ -19,6 +19,7 @@ const RankingCard: React.FC<RankingCardProps> = ({ movie, rank }) => {
           width={40}
           height={60}
           className="object-contain max-h-[40px] w-auto mr-2"
+          unoptimized
         />
         <span className="flex-grow">{movie.title}</span>
         <span className="ml-auto font-semibold">{movie.wins} wins</span>

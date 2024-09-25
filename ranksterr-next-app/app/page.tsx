@@ -23,8 +23,7 @@ const HomePage = () => {
     <div>
       <h1 className="text-3xl font-bold mb-6">Welcome to Ranksterr</h1>
       <p className="mb-8 text-gray-600 dark:text-gray-400">
-        Ranksterr allows you to rank movies by comparing them in pairs. Choose a
-        collection below to start ranking!
+        Trying unoptimized image
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {movieCollections.map((collection) => (
