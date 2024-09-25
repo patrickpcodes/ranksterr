@@ -76,14 +76,14 @@ jobs:
           source: ranksterr-next-app/package.json
           target: /home/ubuntu/ranksterr-next/
 
-      - name: Copy .env.production files to EC2
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ubuntu
-          key: ${{ secrets.EC2_SSH_KEY }}
-          source: ranksterr-next-app/.env.production
-          target: /home/ubuntu/ranksterr-next/
+      # - name: Copy .env.production files to EC2
+      #   uses: appleboy/scp-action@v0.1.7
+      #   with:
+      #     host: ${{ secrets.EC2_HOST }}
+      #     username: ubuntu
+      #     key: ${{ secrets.EC2_SSH_KEY }}
+      #     source: ranksterr-next-app/.env.production
+      #     target: /home/ubuntu/ranksterr-next/
         
       - name: Copy .next files to EC2
         uses: appleboy/scp-action@v0.1.7
