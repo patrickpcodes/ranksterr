@@ -40,6 +40,7 @@ export default function ClickableCard({
             alt={imageAlt}
             fill
             className="object-cover rounded-md"
+            unoptimized
           />
         </div>
       </CardContent>

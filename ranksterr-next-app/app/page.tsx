@@ -39,6 +39,7 @@ const HomePage = () => {
                 width={500}
                 height={750}
                 className="w-full h-auto"
+                unoptimized
               />
               <div className="p-4">
                 <h2 className="text-xl font-semibold">{collection.name}</h2>
