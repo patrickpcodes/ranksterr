@@ -11,17 +11,18 @@ const RankingPage = () => {
   const [currentPair, setCurrentPair] = useState<[Movie, Movie] | null>(null);
   const searchParams = useSearchParams();
   const collectionId = searchParams.get("collection");
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        //const response = await fetch(`/data/${collectionId}.json`);
-        const response = await fetch(`/data/james_bond.json`);
+        const response = await fetch(`${apiUrl}/MovieCollections/${collectionId}`);
         const data = await response.json();
-        const initialMovies = data.parts.map((movie: Movie) => ({
+        const initialMovies = data.movies.map((movie: Movie) => ({
           id: movie.id,
           title: movie.title,
-          poster_path: movie.poster_path,
+          poster_path: movie.posterPath,
+          release_date: movie.releaseDate,
           wins: 0,
         }));
         setMovies(initialMovies);
@@ -34,7 +35,7 @@ const RankingPage = () => {
     if (collectionId) {
       fetchMovies();
     }
-  }, [collectionId]);
+  }, [collectionId, apiUrl]);
 
   const setNextPair = (movieList: Movie[]) => {
     if (movieList.length >= 2) {

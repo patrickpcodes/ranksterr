@@ -26,7 +26,7 @@ export default function ClickableCard({
 }: ClickableCardProps) {
   return (
     <Card
-      className="overflow-hidden cursor-pointer w-[300px]"
+      className="overflow-hidden cursor-pointer w-[300px] ranking-card"
       onClick={onCardClick}
     >
       <CardContent className="p-6 space-y-6">

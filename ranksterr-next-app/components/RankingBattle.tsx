@@ -19,7 +19,9 @@ const RankingBattle: React.FC<RankingBattleProps> = ({
         <div key={movie.id} className="text-center">
           <ClickableMovieCard
             key={movie.id}
-            title={movie.title}
+            title={`${movie.title} (${new Date(
+              movie.release_date
+            ).getFullYear()})`}
             imageSrc={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
             imageAlt={movie.title}
             onCardClick={() => onChoose(movie.id)}

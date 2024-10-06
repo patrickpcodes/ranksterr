@@ -21,7 +21,9 @@ const RankingCard: React.FC<RankingCardProps> = ({ movie, rank }) => {
           className="object-contain max-h-[40px] w-auto mr-2"
           unoptimized
         />
-        <span className="flex-grow">{movie.title}</span>
+        <span className="flex-grow">
+          {movie.title} ({new Date(movie.release_date).getFullYear()})
+        </span>
         <span className="ml-auto font-semibold">{movie.wins} wins</span>
       </CardContent>
     </Card>
