@@ -16,13 +16,13 @@ const RankingPage = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await fetch(`${apiUrl}/MovieCollections/${collectionId}`);
+        const response = await fetch(`${apiUrl}/api/MovieCollections/${collectionId}`);
         const data = await response.json();
         const initialMovies = data.movies.map((movie: Movie) => ({
           id: movie.id,
           title: movie.title,
-          poster_path: movie.posterPath,
-          release_date: movie.releaseDate,
+          poster_path: movie.poster_path,
+          release_date: movie.release_date,
           wins: 0,
         }));
         setMovies(initialMovies);

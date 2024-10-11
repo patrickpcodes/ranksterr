@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./ranksterr-next-app
+      dockerfile: Dockerfile
+    container_name: ranksterr-frontend
+    ports:
+      - "3005:3005"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:5000
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./Ranksterr.Server.Api
+      dockerfile: Dockerfile
+    container_name: ranksterr-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=RanksterrDB;User Id=sa;Password=${SA_PASSWORD};TrustServerCertificate=True;
+      - MongoDbSettings__ConnectionString=mongodb://mongodb:27017
+      - MongoDbSettings__DatabaseName=RanksterrMongoDB
+    depends_on:
+      - sqlserver
+      - mongodb
+    restart: unless-stopped
+    entrypoint: ["/bin/sh", "-c", "dotnet Ranksterr.Server.Api.dll"]
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=${SA_PASSWORD}
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P \"$SA_PASSWORD\" -Q \"SELECT 1\" || exit 1"]
+      interval: 10s
+      retries: 3
+      start_period: 30s
+      timeout: 5s
+
+  mongodb:
+    image: mongo:latest
+    container_name: ranksterr-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db  # Changed to use named volume
+    restart: unless-stopped
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+
+volumes:
+  sqlserver_data:
+  mongodb_data:

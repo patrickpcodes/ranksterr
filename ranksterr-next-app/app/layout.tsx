@@ -4,6 +4,7 @@ import "../styles/globals.css";
 import Navbar from "@/components/Navbar"; // Import the Navbar component
 import Sidebar from "@/components/Sidebar"; // Import the Sidebar component
 import React, { useState, useEffect, useRef } from "react";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function RootLayout({
   children,
@@ -12,6 +13,7 @@ export default function RootLayout({
 }>) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
+  const { isLoading } = useAuth();
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -43,7 +45,13 @@ export default function RootLayout({
             onClose={() => setIsSidebarOpen(false)}
           />
         </div>
-        <main className="pt-20 px-4 sm:px-6 lg:px-8">{children}</main>
+        <main className="pt-20 px-4 sm:px-6 lg:px-8">
+          {isLoading ? (
+            <div>Loading...</div>
+          ) : (
+            children
+          )}
+        </main>
       </body>
     </html>
   );

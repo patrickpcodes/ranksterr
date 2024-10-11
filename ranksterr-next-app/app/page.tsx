@@ -4,18 +4,29 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { MovieCollection } from "@/types/MovieCollection";
+import { useAuth } from "@/hooks/useAuth";
+import { useRouter } from "next/navigation";
 
 const HomePage = () => {
+  const { isAuthenticated, isLoading: authLoading } = useAuth();
+  const router = useRouter();
+
   const [movieCollections, setMovieCollections] = useState<MovieCollection[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
+    if (!authLoading && !isAuthenticated) {
+      router.push('/login');
+    }
+  }, [isAuthenticated, authLoading, router]);
+
+  useEffect(() => {
     const fetchMovieCollections = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(`${apiUrl}/movieCollections`);
+        const response = await fetch(`${apiUrl}/api/movieCollections`);
         if (!response.ok) {
           throw new Error('Failed to fetch movie collections');
         }
@@ -37,8 +48,8 @@ const HomePage = () => {
     return <div>Loading...</div>;
   }
 
-  if (error) {
-    return <div>Error: {error}</div>;
+  if (!isAuthenticated) {
+    return null;
   }
 
   return (
@@ -57,7 +68,7 @@ const HomePage = () => {
             >
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105">
                 <Image
-                  src={`https://image.tmdb.org/t/p/w500${collection.posterPath}`}
+                  src={`https://image.tmdb.org/t/p/w500${collection.poster_path}`}
                   alt={collection.name}
                   width={500}
                   height={750}

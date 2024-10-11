@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Menu } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 
 interface NavbarProps {
   onToggleSidebar: () => void;
@@ -11,6 +12,8 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const pathname = usePathname();
+  const router = useRouter();
+  const { isAuthenticated, logout, user } = useAuth();
 
   // Function to derive the page name from the current path
   const getPageName = () => {
@@ -27,7 +30,6 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
   };
 
   useEffect(() => {
-    // Toggle dark mode class on the root HTML element
     if (isDarkMode) {
       document.documentElement.classList.add("dark");
     } else {
@@ -36,7 +38,16 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
   }, [isDarkMode]);
 
   const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
+    setIsDarkMode((prevMode) => !prevMode);
+  };
+
+  const handleAuthAction = () => {
+    if (isAuthenticated) {
+      logout();
+      router.push('/login');
+    } else {
+      router.push('/login');
+    }
   };
 
   return (
@@ -48,9 +59,17 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
         <Menu size={24} />
       </button>
       <h1>{getPageName()}</h1>
-      <button onClick={toggleDarkMode} className="testbutton p-2 rounded">
-        {isDarkMode ? "Light Mode" : "Dark Mode"}
-      </button>
+      <div className="flex items-center">
+        {isAuthenticated && user && (
+          <span className="mr-4 text-white">Welcome, {user.username}</span>
+        )}
+        <button onClick={toggleDarkMode} className="testbutton p-2 rounded mr-2">
+          {isDarkMode ? "Light Mode" : "Dark Mode"}
+        </button>
+        <button onClick={handleAuthAction} className="p-2 rounded bg-blue-500 text-white">
+          {isAuthenticated ? "Logout" : "Login"}
+        </button>
+      </div>
     </nav>
   );
 };
