@@ -18,7 +18,7 @@ const RankingPage = () => {
       try {
         const response = await fetch(`${apiUrl}/api/MovieCollections/${collectionId}`);
         const data = await response.json();
-        const initialMovies = data.movies.map((movie: Movie) => ({
+        const initialMovies = data.parts.map((movie: Movie) => ({
           id: movie.id,
           title: movie.title,
           poster_path: movie.poster_path,

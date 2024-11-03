@@ -1,17 +1,17 @@
-version: '3.8'
-
 services:
   frontend:
     build:
-      context: ./ranksterr-next-app
-      dockerfile: Dockerfile
+        context: ./ranksterr-next-app
+        dockerfile: Dockerfile
+        args:
+          NEXT_PUBLIC_API_URL: http://localhost:5000
     container_name: ranksterr-frontend
     ports:
-      - "3005:3005"
+      - "3005:3000"
     environment:
-      - NEXT_PUBLIC_API_URL=http://backend:5000
+      - NEXT_PUBLIC_API_URL=http://localhost:5000
     depends_on:
-      - backend
+     - backend
     restart: unless-stopped
 
   backend:
@@ -23,6 +23,7 @@ services:
       - "5000:5000"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5000
       - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=RanksterrDB;User Id=sa;Password=${SA_PASSWORD};TrustServerCertificate=True;
       - MongoDbSettings__ConnectionString=mongodb://mongodb:27017
       - MongoDbSettings__DatabaseName=RanksterrMongoDB

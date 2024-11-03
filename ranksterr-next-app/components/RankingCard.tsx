@@ -6,9 +6,10 @@ import { Movie } from "@/types/Movie";
 interface RankingCardProps {
   movie: Movie;
   rank: number;
+  wins: number;
 }
 
-const RankingCard: React.FC<RankingCardProps> = ({ movie, rank }) => {
+const RankingCard: React.FC<RankingCardProps> = ({ movie, rank, wins }) => {
   return (
     <Card className="mb-2 ranking-card">
       <CardContent className="flex items-center p-2">
@@ -24,7 +25,7 @@ const RankingCard: React.FC<RankingCardProps> = ({ movie, rank }) => {
         <span className="flex-grow">
           {movie.title} ({new Date(movie.release_date).getFullYear()})
         </span>
-        <span className="ml-auto font-semibold">{movie.wins} wins</span>
+        <span className="ml-auto font-semibold">{wins} wins</span>
       </CardContent>
     </Card>
   );

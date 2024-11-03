@@ -13,6 +13,7 @@ const RankingBattle: React.FC<RankingBattleProps> = ({
   movie2,
   onChoose,
 }) => {
+  console.log("Just Generated for movie", movie1, movie2);
   return (
     <div className="flex justify-around">
       {[movie1, movie2].map((movie) => (

@@ -402,3 +402,5 @@ FodyWeavers.xsd
 .idea/config/
 
 data/
+
+Ranksterr.Server.Api/appsettings.Development.json

@@ -4,6 +4,12 @@ FROM node:18-alpine
 # Set the working directory in the container
 WORKDIR /app
 
+# Add an ARG for the API URL
+ARG NEXT_PUBLIC_API_URL
+
+# Set the environment variable inside the container
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+
 # Copy package.json and package-lock.json
 COPY package*.json ./
 

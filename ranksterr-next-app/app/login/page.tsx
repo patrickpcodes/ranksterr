@@ -37,39 +37,39 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
-      <div className="px-8 py-6 mt-4 text-left bg-white dark:bg-gray-800 shadow-lg">
-        <h3 className="text-2xl font-bold text-center text-gray-800 dark:text-white">Login to your account</h3>
+    <div className="flex items-center justify-center min-h-screen bg-background">
+      <div className="px-8 py-6 mt-4 text-left bg-card shadow-lg rounded-lg">
+        <h3 className="text-2xl font-bold text-center text-foreground">Login to your account</h3>
         <form onSubmit={handleSubmit}>
           <div className="mt-4">
             <div>
-              <label className="block text-gray-700 dark:text-gray-300" htmlFor="username">Username</label>
+              <label className="block text-sm font-medium text-muted-foreground" htmlFor="username">Username</label>
               <input
                 type="text"
                 placeholder="Username"
-                className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600 text-gray-900 dark:text-white bg-white dark:bg-gray-700"
+                className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-background text-foreground"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
               />
             </div>
             <div className="mt-4">
-              <label className="block text-gray-700 dark:text-gray-300" htmlFor="password">Password</label>
+              <label className="block text-sm font-medium text-muted-foreground" htmlFor="password">Password</label>
               <input
                 type="password"
                 placeholder="Password"
-                className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600 text-gray-900 dark:text-white bg-white dark:bg-gray-700"
+                className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-background text-foreground"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
             <div className="flex items-baseline justify-between">
-              <button className="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">Login</button>
+              <button className="px-6 py-2 mt-4 text-white bg-primary rounded-lg hover:bg-primary/90">Login</button>
             </div>
           </div>
         </form>
-        {error && <p className="text-red-500 mt-4">{error}</p>}
+        {error && <p className="text-destructive mt-4">{error}</p>}
       </div>
     </div>
   );

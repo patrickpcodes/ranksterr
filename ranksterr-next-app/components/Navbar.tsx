@@ -51,22 +51,22 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
   };
 
   return (
-    <nav className="navbar p-4 flex justify-between items-center fixed top-0 left-0 right-0 z-40">
+    <nav className="bg-navbar-light dark:bg-navbar-dark p-4 flex justify-between items-center fixed top-0 left-0 right-0 z-40">
       <button
         onClick={onToggleSidebar}
-        className="text-gray-800 dark:text-gray-200"
+        className="text-foreground"
       >
         <Menu size={24} />
       </button>
-      <h1>{getPageName()}</h1>
+      <h1 className="text-foreground">{getPageName()}</h1>
       <div className="flex items-center">
         {isAuthenticated && user && (
-          <span className="mr-4 text-white">Welcome, {user.username}</span>
+          <span className="mr-4 text-foreground">Welcome, {user.username}</span>
         )}
-        <button onClick={toggleDarkMode} className="testbutton p-2 rounded mr-2">
+        <button onClick={toggleDarkMode} className="p-2 rounded mr-2 bg-secondary text-secondary-foreground">
           {isDarkMode ? "Light Mode" : "Dark Mode"}
         </button>
-        <button onClick={handleAuthAction} className="p-2 rounded bg-blue-500 text-white">
+        <button onClick={handleAuthAction} className="p-2 rounded bg-primary text-primary-foreground">
           {isAuthenticated ? "Logout" : "Login"}
         </button>
       </div>

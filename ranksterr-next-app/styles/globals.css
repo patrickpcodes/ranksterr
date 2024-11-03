@@ -4,47 +4,60 @@
 
 @layer base {
   :root {
-    --background-light: #ffffff; /* White for light mode */
-    --background-dark: #000000; /* Black for dark mode */
-    --text-light: #ffffff; /* White text for dark mode */
-    --text-dark: #000000; /* Black text for light mode */
-
-    --blue-light: #4f83cc; /* Light mode blue */
-    --blue-dark: #1e3a8a; /* Dark mode blue */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 89%;
+    --input: 0 0% 89%;
+    --ring: 221 83% 53%;
+    --radius: 0.5rem;
+    --navbar-light: 210 100% 85%; /* Light blue */
+    --navbar-dark: 220 100% 20%; /* Dark blue */
   }
 
+  .dark {
+    --background: 0 0% 10%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 16%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 16%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 16%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 16%;
+    --muted-foreground: 0 0% 63%;
+    --accent: 0 0% 16%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 27%;
+    --input: 0 0% 27%;
+    --ring: 221 83% 53%;
+    --navbar-light: 220 100% 20%; /* Dark blue */
+    --navbar-dark: 220 100% 20%; /* Dark blue */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
   body {
-    background-color: var(--background-light);
-    color: var(--text-dark);
-  }
-
-  .dark body {
-    background-color: var(--background-dark);
-    color: var(--text-light);
-  }
-
-  .navbar {
-    background-color: var(--blue-light);
-  }
-
-  .dark .navbar {
-    background-color: var(--blue-dark);
-  }
-
-  .ranking-card {
-    background-color: var(--blue-light);
-    color: var(--text-dark);
-  }
-
-  .dark .ranking-card {
-    background-color: var(--blue-dark);
-    color: var(--text-light);
-  }
-
-  .testbutton {
-    background-color: lightgreen;
-  }
-  .dark .testbutton {
-    background-color: darkgreen;
+    @apply bg-background text-foreground;
   }
 }
