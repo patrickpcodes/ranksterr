@@ -5,4 +5,5 @@ export interface Battle {
   movie1: Movie;
   movie2: Movie;
   winnerId: number | null;
+  updatedDate: string;
 }

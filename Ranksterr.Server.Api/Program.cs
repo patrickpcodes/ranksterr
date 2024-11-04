@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Ranksterr.Server.Api.Data;
 using Ranksterr.Server.Api.Models;
 using System.Text;
 using Microsoft.Extensions.Options;

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { Home, Settings, X, Trophy } from "lucide-react";
+import { Home, Settings, X, Trophy, Swords } from "lucide-react";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -65,6 +65,19 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
               >
                 <Trophy className="mr-2" size={20} />
                 Ranking
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={() => handleLinkClick("/war")}
+                className={`flex items-center px-4 py-2 w-full text-left ${
+                  pathname === "/war"
+                    ? "text-blue-500"
+                    : "text-gray-700 dark:text-gray-300"
+                }`}
+              >
+                <Swords className="mr-2" size={20} />
+                War
               </button>
             </li>
             <li>

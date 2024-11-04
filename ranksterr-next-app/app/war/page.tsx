@@ -6,9 +6,11 @@ import React, { useState, useEffect, Suspense } from "react";
 import RankingBattle from "@/components/RankingBattle";
 import WarRankings from "@/components/WarRankings";
 import { War } from "@/types/War";
+import WarHistory from "@/components/WarHistory";
 
 const WarPage = () => {
   const [war, setWar] = useState<War | null>(null);
+  const [activeTab, setActiveTab] = useState("ranking");
   // const router = useRouter();
   // console.log(router.query);
   // const { id } = router.query;
@@ -97,7 +99,32 @@ const WarPage = () => {
         )}
       </div>
       <div className="w-[30%] p-4">
-        <WarRankings war={war} />
+        <div className="tabs flex border-b-2 border-gray-300">
+          <button
+            className={`tab flex-1 py-2 text-center ${
+              activeTab === "ranking"
+                ? "border-b-2 border-blue-500 text-blue-500"
+                : "text-gray-500"
+            }`}
+            onClick={() => setActiveTab("ranking")}
+          >
+            Ranking
+          </button>
+          <button
+            className={`tab flex-1 py-2 text-center ${
+              activeTab === "battles"
+                ? "border-b-2 border-blue-500 text-blue-500"
+                : "text-gray-500"
+            }`}
+            onClick={() => setActiveTab("battles")}
+          >
+            Battles
+          </button>
+        </div>
+        <div className="tab-content mt-4">
+          {activeTab === "ranking" && <WarRankings war={war} />}
+          {activeTab === "battles" && <WarHistory war={war} />}
+        </div>
       </div>
     </div>
   );

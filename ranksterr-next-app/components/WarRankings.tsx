@@ -2,11 +2,7 @@ import React from "react";
 import RankingCard from "./RankingCard";
 import { War } from "@/types/War";
 
-interface WarRankingsProps {
-  war: War | null;
-}
-
-const WarRankings: React.FC<WarRankingsProps> = ({ war }) => {
+const WarRankings: React.FC<{ war: War | null }> = ({ war }) => {
   if (!war) return null;
 
   // Create a map to store the wins for each movie

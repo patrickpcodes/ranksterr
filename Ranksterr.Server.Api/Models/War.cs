@@ -10,7 +10,13 @@ namespace Ranksterr.Server.Api.Models
         public List<Movie> Movies { get; set; } = new List<Movie>();
         public List<Battle> Battles { get; set; } = new List<Battle>();
         public Battle NextBattle { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime UpdatedDate { get; set; }
 
+        public War()
+        {
+            CreatedDate = DateTime.UtcNow;
+        }
         public void GenerateBattles()
         {
             for (int i = 0; i < Movies.Count; i++)
@@ -30,11 +36,11 @@ namespace Ranksterr.Server.Api.Models
 
         public void UpdateNextBattle()
         {
-            var battlesWithoutWinner = Battles.FindAll( b => b.WinnerId == 0 );
-            if( battlesWithoutWinner.Count > 0 )
+            var battlesWithoutWinner = Battles.FindAll(b => b.WinnerId == 0);
+            if (battlesWithoutWinner.Count > 0)
             {
                 var random = new Random();
-                NextBattle = battlesWithoutWinner[random.Next( battlesWithoutWinner.Count )];
+                NextBattle = battlesWithoutWinner[random.Next(battlesWithoutWinner.Count)];
             }
             else
             {

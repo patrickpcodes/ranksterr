@@ -6,4 +6,6 @@ export interface War {
   movies: Movie[];
   battles: Battle[];
   nextBattle: Battle;
+  createdDate: string;
+  updatedDate: string;
 }

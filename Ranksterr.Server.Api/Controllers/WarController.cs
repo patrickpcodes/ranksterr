@@ -67,7 +67,6 @@ namespace Ranksterr.Server.Api.Controllers
             }
 
             battle.WinnerId = request.WinnerId;
-            war.UpdateNextBattle();
 
             await _repository.SaveBattleAsync(battle);
             var serializedWar = JsonConvert.SerializeObject( war, _jsonSettings );

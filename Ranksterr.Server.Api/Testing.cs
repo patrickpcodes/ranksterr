@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using MongoDB.Driver;
 using Newtonsoft.Json;
-using Ranksterr.Server.Api.Data;
 using Ranksterr.Server.Api.Models;
 using Ranksterr.Server.Api.Repositories;
 
@@ -21,7 +20,7 @@ public static class Testing
         var mongoClient = scope.ServiceProvider.GetRequiredService<IMongoClient>();
         var database = mongoClient.GetDatabase("RanksterrMongoDB");
         var collection = database.GetCollection<MovieCollection>("MovieCollections");
-        var dataPath = Path.Combine(app.Environment.ContentRootPath, "Data");
+        var dataPath = Path.Combine(app.Environment.ContentRootPath, "DataFiles");
         var jsonFiles = Directory.GetFiles(dataPath, "*.json");
 
         foreach (var file in jsonFiles)
@@ -43,7 +42,7 @@ public static class Testing
         }
 
         // Create a war with specified movie IDs
-        var movieIds = new List<int> { 10138, 68721, 253, 714, 671, 675, 12445 };
+        var movieIds = new List<int> { 10138, 68721, 253, 714, 671, 675, 12445, 755679, 9615 };
         var movies = new List<Movie>();
         foreach (var id in movieIds)
         {

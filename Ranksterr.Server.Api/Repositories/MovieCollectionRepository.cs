@@ -87,7 +87,9 @@ namespace Ranksterr.Server.Api.Repositories
                 if( battle != null )
                 {
                     battle.WinnerId = winnerId;
+                    battle.UpdatedDate = DateTime.UtcNow;
                     war.UpdateNextBattle();
+                    war.UpdatedDate = DateTime.UtcNow;
                     await _wars.ReplaceOneAsync( w => w.Id == war.Id, war );
                 }
             }
